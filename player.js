@@ -1,9 +1,10 @@
 class Player extends GameObject {
-    constructor(x, y) {
+    constructor(canvas, position) {
         super();
-        this.position = new Vector(x, y);
-        this.speed = 5;
-        this.radius = 30;
+        this.canvas = canvas;
+        this.position = position;
+        this.speed = 10;
+        this.radius = 15;
         this.color = "#27d600ff";
     }
 
@@ -15,7 +16,16 @@ class Player extends GameObject {
     }
 
     update() {
+        if (isBoostActive()) {
+            this.speed = 20;
+        } else {
+            this.speed = 5;
+        }
         const inputDir = getInputDirection();
         this.position = this.position.add(inputDir.multiply(this.speed));
+        if (this.position.x < 0) this.position.x = 0;
+        if (this.position.y < 0) this.position.y = 0;
+        if (this.position.x > canvas.width) this.position.x = canvas.width;
+        if (this.position.y > canvas.height) this.position.y = canvas.height;
     }
 }

@@ -2,7 +2,8 @@ const KeyBinding = {
     LEFT: "A",
     UP: "W",
     RIGHT: "D",
-    DOWN: "S"
+    DOWN: "S",
+    BOOST: "SHIFT"
 };
 
 const keysPressed = {};
@@ -22,4 +23,9 @@ const getInputDirection = () => {
     if (keysPressed[KeyBinding.UP]) dir = dir.add(new Vector(0, -1));
     if (keysPressed[KeyBinding.DOWN]) dir = dir.add(new Vector(0, 1));
     return dir;
+};
+
+
+const isBoostActive = () => {
+    return keysPressed[KeyBinding.BOOST];
 };
