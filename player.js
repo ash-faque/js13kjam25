@@ -8,12 +8,12 @@ class Player extends Entity {
 		this.head_color = "#171717ff";
 		this.look_dir = { x: 1, y: 0 };
 		this.is_under_tree = false;
-		this.walk_speed = 5;
+		this.walk_speed = 7.5;
 		this.speed = 0;
 		this.sprint_speed = 15;
 		this.sprint_power = 100;
 		this.sprint_power_max = 100;
-		this.movement_tick = 100;
+		this.movement_tick = 10;
 		setInterval(() => this.movement(), this.movement_tick);
 		this.firing_tick = 200;
 		this.fired = true;
@@ -79,13 +79,13 @@ class Player extends Entity {
 	}
 
 	hud(c) {
-		const bar_height = 20, bar_width = this.canvas.width * 0.25, bar_x = 60, start_y = this.canvas.height - 120, spacing = 30;
+		const bar_height = 20, bar_width = this.canvas.width * 0.25, bar_x = 70, start_y = this.canvas.height - 100, spacing = 30;
 		c.save();
 		c.font = "12px Iosevka";
 		c.textBaseline = "middle";
 		const drawBar = (label, value, max, color, y) => {
 			c.fillStyle = "#fff";
-			c.fillText(label, 10, y + bar_height / 2);
+			c.fillText(label, 20, y + bar_height / 2);
 			c.fillStyle = "#222";
 			c.fillRect(bar_x, y, bar_width, bar_height);
 			c.fillStyle = color;

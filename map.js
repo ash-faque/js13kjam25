@@ -20,20 +20,20 @@ class Map extends Entity {
 	genChunk(cx, cy) {
 		const rand = this.randChunk(cx, cy);
 		const trees = [];
-		const numTrees = Math.floor(rand() * 2);
+		const numTrees = Math.floor(rand() * 3);
 		for (let i = 0; i < numTrees; i++) {
 			const x = cx * this.cellSize + rand() * this.cellSize;
 			const y = cy * this.cellSize + rand() * this.cellSize;
 			const branches = [];
-			let previous_rad = 100;
-			for (let j = 0; j < 3; j++) {
-				let rad = 25 + rand() * 50;
-				if (rad > previous_rad) rad = previous_rad * 0.7;
+			const centerRad = 40 + rand() * 30;
+			branches.push(new TreeBranch(centerRad, 0, 0, "rgb(34, 80, 34)"));
+			const numBranches = 2 + Math.floor(rand() * 5);
+			for (let j = 0; j < numBranches; j++) {
+				const rad = centerRad * (0.3 + rand() * 0.4);
 				const angle = rand() * 2 * Math.PI;
-				const length = rand() * rad * 1.2;
-				const color = `rgb(34, ${80 + Math.floor(rand() * 85)}, 34)`;
+				const length = rad * (0.8 + rand() * 0.4);
+				const color = `rgb(34, ${100 + Math.floor(rand() * 65)}, 34)`;
 				branches.push(new TreeBranch(rad, angle, length, color));
-				previous_rad = rad;
 			}
 			trees.push(new Tree(new V2(x, y), branches));
 		}
