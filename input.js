@@ -3,7 +3,11 @@ const KeyBinding = {
     UP: "W",
     RIGHT: "D",
     DOWN: "S",
-    BOOST: "SHIFT"
+    BOOST: "L",
+    DEBUG: "X",
+    FIRE: "F",
+    RELOAD: "R",
+    JUMP: "X"
 };
 
 const keysPressed = {};
@@ -28,4 +32,21 @@ const getInputDirection = () => {
 
 const isBoostActive = () => {
     return keysPressed[KeyBinding.BOOST];
+};
+
+const printDebug = () => {
+    return keysPressed[KeyBinding.DEBUG];
+};
+
+const isFiring = () => {
+    return keysPressed[KeyBinding.FIRE];
+};
+
+const isJumping = () => {
+    return keysPressed[KeyBinding.JUMP];
+};
+
+
+const isReloading = () => {
+    return keysPressed[KeyBinding.RELOAD];
 };

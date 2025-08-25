@@ -5,16 +5,20 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 const gameMap = new Map(canvas, "12345");
-
 const myPlayer = new Player(canvas, new Vector(100, 100));
+
+gameMap.addPlayer(myPlayer);
 
 function gameLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     GameObject.updateAll();
-    GameObject.drawAll(ctx);
 
-    requestAnimationFrame(gameLoop);
+    gameMap.draw(ctx);
+
+    setTimeout(() => {
+        requestAnimationFrame(gameLoop);
+    }, 1000 / 60);
 }
 gameLoop();
 

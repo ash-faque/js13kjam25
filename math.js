@@ -19,4 +19,8 @@ class Vector {
     divide(scalar) {
         return new Vector(this.x / scalar, this.y / scalar);
     }
+
+    length() {
+        return Math.sqrt(this.x * this.x + this.y * this.y);
+    }
 }
