@@ -21,11 +21,11 @@ onkeyup = (event) => {
 };
 
 const getInputDirection = () => {
-    let dir = new Vector(0, 0);
-    if (keysPressed[KeyBinding.LEFT]) dir = dir.add(new Vector(-1, 0));
-    if (keysPressed[KeyBinding.RIGHT]) dir = dir.add(new Vector(1, 0));
-    if (keysPressed[KeyBinding.UP]) dir = dir.add(new Vector(0, -1));
-    if (keysPressed[KeyBinding.DOWN]) dir = dir.add(new Vector(0, 1));
+    let dir = new V2(0, 0);
+    if (keysPressed[KeyBinding.LEFT]) dir = dir.add(new V2(-1, 0));
+    if (keysPressed[KeyBinding.RIGHT]) dir = dir.add(new V2(1, 0));
+    if (keysPressed[KeyBinding.UP]) dir = dir.add(new V2(0, -1));
+    if (keysPressed[KeyBinding.DOWN]) dir = dir.add(new V2(0, 1));
     return dir;
 };
 
@@ -45,7 +45,6 @@ const isFiring = () => {
 const isJumping = () => {
     return keysPressed[KeyBinding.JUMP];
 };
-
 
 const isReloading = () => {
     return keysPressed[KeyBinding.RELOAD];

@@ -1,24 +1,24 @@
 const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
+const c = canvas.getContext("2d");
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-const gameMap = new Map(canvas, "12345");
-const myPlayer = new Player(canvas, new Vector(100, 100));
+const m = new Map(canvas, "12345");
+const p = new Player(canvas, new V2(0, 0));
 
-gameMap.addPlayer(myPlayer);
+m.addp(p);
 
-function gameLoop() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+const loop = () => {
+    c.clearRect(0, 0, canvas.width, canvas.height);
 
-    GameObject.updateAll();
+    Entity.update();
 
-    gameMap.draw(ctx);
+    m.draw(c);
 
     setTimeout(() => {
-        requestAnimationFrame(gameLoop);
+        requestAnimationFrame(loop);
     }, 1000 / 60);
 }
-gameLoop();
+loop();
 

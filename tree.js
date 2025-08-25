@@ -1,70 +1,57 @@
-class Tree extends GameObject {
-    constructor(position, branches) {
+class Tree extends Entity {
+    constructor(pos, branches) {
         super();
-        this.position = position;
+        this.pos = pos;
         this.branches = branches;
-        this.radius = Math.max(...branches.map(b => b.radius));
-        this.player_under = false;
+        this.rad = Math.max(...branches.map(b => b.rad));
+        this.p_under = false;
     }
 
-    draw(ctx, offsetX, offsetY) {
+    draw(c, x_off, y_off) {
         for (let i = 0; i < this.branches.length; i++) {
             const branch = this.branches[i];
-            branch.draw(ctx, this.position.x + offsetX, this.position.y + offsetY, this.player_under);
+            branch.draw(c, this.pos.x + x_off, this.pos.y + y_off, this.p_under);
         }
     }
 
     update() { }
 
-    isCollidingWithPlayer(player) {
-        const dx = this.position.x - player.position.x;
-        const dy = this.position.y - player.position.y;
-        const distanceSq = dx * dx + dy * dy;
-        const minDist = this.radius + player.radius;
+    isCollidingWithp(p) {
+        const dx = this.pos.x - p.pos.x;
+        const dy = this.pos.y - p.pos.y;
+        const d_sq = dx * dx + dy * dy;
+        const minDist = this.rad + p.rad;
 
-        if (distanceSq <= minDist * minDist) {
-            this.player_under = true;
+        if (d_sq <= minDist * minDist) {
+            this.p_under = true;
             return true;
         } else {
-            this.player_under = false;
+            this.p_under = false;
             return false;
         }
     }
 }
 
 
-
-
 class TreeBranch {
-    constructor(radius, angle, length, color) {
-        this.radius = radius;
+    constructor(rad, angle, length, color) {
+        this.rad = rad;
         this.angle = angle;
         this.length = length;
         this.color = color;
     }
 
-
-
-    draw(ctx, offsetX, offsetY, playerUnder) {
-        const x = offsetX + Math.cos(this.angle) * this.length;
-        const y = offsetY + Math.sin(this.angle) * this.length;
-
-        ctx.save();
-        
-        ctx.beginPath();
-        ctx.arc(x, y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = this.color;
-        
-        if (playerUnder) {
-            ctx.globalAlpha = 0.6;
-        } else {
-            ctx.globalAlpha = 1.0;
-        }
-
-        ctx.fill();
-        ctx.closePath();
-        ctx.restore();
+    draw(c, x_off, y_off, p_under) {
+        const x = x_off + Math.cos(this.angle) * this.length;
+        const y = y_off + Math.sin(this.angle) * this.length;
+        c.save();
+        c.beginPath();
+        c.arc(x, y, this.rad, 0, Math.PI * 2);
+        c.fillStyle = this.color;
+        p_under ? c.globalAlpha = 0.6 : c.globalAlpha = 1.0;
+        c.fill();
+        c.closePath();
+        c.restore();
     }
-
 
 }
